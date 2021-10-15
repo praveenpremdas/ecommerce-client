@@ -1,17 +1,26 @@
 import React from "react";
-import "./app.css";
-import "./components/navbar/navbar";
-import Navbar from "./components/navbar/navbar";
-import Products from "./components/products/products";
-import Footer from "./components/footer/footer";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Home from "./pages/home";
+import Admin from "./pages/admin";
+import AddProduct from "./components/addProduct/addProduct";
+import AddAnotherProduct from "./components/addProduct/addAnotherProduct";
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Products />
-      <Footer />
-    </div>
+    <Router>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/admin">
+        <Admin />
+      </Route>
+      <Route path="/addProduct">
+        <AddProduct />
+      </Route>
+      <Route path="/addAnotherProduct">
+        <AddAnotherProduct />
+      </Route>
+    </Router>
   );
 }
 
