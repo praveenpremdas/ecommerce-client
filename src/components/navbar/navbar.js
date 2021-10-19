@@ -30,14 +30,13 @@ function navbar() {
         <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item active">
-              <a className="nav-link text-white" href="#">
+              <p className="nav-link text-white">
                 Login <span className="sr-only">(current)</span>
-              </a>
+              </p>
             </li>
             <li class="nav-item dropdown">
-              <a
+              <p
                 class="nav-link dropdown-toggle text-white"
-                href="#"
                 id="navbarDropdown"
                 role="button"
                 data-toggle="dropdown"
@@ -45,28 +44,16 @@ function navbar() {
                 aria-expanded="false"
               >
                 More
-              </a>
+              </p>
 
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">
-                  Cart
-                </a>
-                <a class="dropdown-item" href="#">
-                  Wishlist
-                </a>
-                <a class="dropdown-item" href="#">
-                  Categories
-                </a>
-                <a class="dropdown-item" href="#">
-                  Order history
-                </a>
-                <a class="dropdown-item" href="#">
-                  Customer support
-                </a>
+                <p class="dropdown-item">Cart</p>
+                <p class="dropdown-item">Wishlist</p>
+                <p class="dropdown-item">Categories</p>
+                <p class="dropdown-item">Order history</p>
+                <p class="dropdown-item">Customer support</p>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                  My Profile
-                </a>
+                <p class="dropdown-item">My Profile</p>
               </div>
             </li>
           </ul>

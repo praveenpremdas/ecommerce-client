@@ -4,6 +4,8 @@ import Home from "./pages/home";
 import Admin from "./pages/admin";
 import AddProduct from "./components/addProduct/addProduct";
 import AddAnotherProduct from "./components/addProduct/addAnotherProduct";
+import ProductUpdation from "./pages/productUpdation";
+import ViewProducts from "./pages/viewProducts";
 
 function App() {
   return (
@@ -19,6 +21,12 @@ function App() {
       </Route>
       <Route path="/addAnotherProduct">
         <AddAnotherProduct />
+      </Route>
+      <Route path="/updateProduct">
+        <ProductUpdation />
+      </Route>
+      <Route path="/viewProducts">
+        <ViewProducts />
       </Route>
     </Router>
   );

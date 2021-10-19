@@ -3,10 +3,12 @@ import add from "../../assets/add.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
-export default function AddProduct() {
+export default function AddProduct(props) {
   const history = useHistory();
+  const location = useLocation();
+  const purpose = props.purpose;
 
   const [productDetails, setProductDetail] = useState({
     productName: "",
@@ -36,51 +38,80 @@ export default function AddProduct() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (purpose === "addProduct") {
+      if (
+        productDetails.productName === "" ||
+        productDetails.price === "" ||
+        productDetails.rating === "" ||
+        productDetails.offers === "" ||
+        productDetails.seller === "" ||
+        productDetails.stock === "" ||
+        productDetails.catagory === "" ||
+        productDetails.productDiscription === "" ||
+        productDetails.image === null
+      ) {
+        toast("Please fill the required fields");
+      } else {
+        const fd = new FormData();
+        for (const i in productDetails) {
+          fd.append(i, productDetails[i]);
+        }
 
-    if (
-      productDetails.productName == "" ||
-      productDetails.price == "" ||
-      productDetails.rating == "" ||
-      productDetails.offers == "" ||
-      productDetails.seller == "" ||
-      productDetails.stock == "" ||
-      productDetails.catagory == "" ||
-      productDetails.productDiscription == "" ||
-      productDetails.image == null
-    ) {
-      toast("Please fill the required fields");
-    } else {
+        axios
+          .post("http://localhost:5000/api/admin/addProduct", fd, {
+            onDownloadProgress: (ProgressEvent) => {
+              setProductDetail({
+                ...productDetails,
+                uploadProgress:
+                  "Upload progress" +
+                  Math.round(
+                    (ProgressEvent.loaded / ProgressEvent.total) * 100
+                  ) +
+                  "%",
+              });
+              console.log(
+                "Upload progress" +
+                  Math.round(
+                    (ProgressEvent.loaded / ProgressEvent.total) * 100
+                  ) +
+                  "%"
+              );
+            },
+          })
+          .then(function (response) {
+            console.log(response);
+            alert(`Product Added product ID = ${response.data}`);
+            history.push("/addAnotherProduct");
+          })
+          .catch(function (error) {
+            console.log(error);
+            toast(error);
+          });
+      }
+    }
+
+    if (purpose === "productUpdation") {
       const fd = new FormData();
+      fd.append("_id", location.state.productId);
       for (const i in productDetails) {
-        fd.append(i, productDetails[i]);
+        if (productDetails[i] !== "" && productDetails[i] !== null) {
+          fd.append(i, productDetails[i]);
+          console.log(productDetails[i]);
+        }
       }
 
-      axios
-        .post("http://localhost:5000/api/admin/addProduct", fd, {
-          onDownloadProgress: (ProgressEvent) => {
-            setProductDetail({
-              ...productDetails,
-              uploadProgress:
-                "Upload progress" +
-                Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100) +
-                "%",
-            });
-            console.log(
-              "Upload progress" +
-                Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100) +
-                "%"
-            );
-          },
-        })
-        .then(function (response) {
-          console.log(response);
-          alert(`Product Added product ID = ${response.data}`);
-          history.push("/addAnotherProduct");
-        })
-        .catch(function (error) {
-          console.log(error);
-          toast(error);
-        });
+      const response = await axios.post(
+        "http://localhost:5000/api/admin/productUpdation",
+        fd
+      );
+      console.log(response.data);
+      if (response.data === "sucess") {
+        toast("Product sucessfully Updated");
+        setTimeout(() => history.push("/viewProducts"), 4000);
+      } else {
+        toast("Updation Failed");
+        setTimeout(() => history.push("/viewProducts"), 4000);
+      }
     }
   };
 
@@ -90,7 +121,7 @@ export default function AddProduct() {
       style={{ height: "100%", padding: "10%" }}
     >
       <div className="contact-image">
-        <img src={add} alt="add_image" />
+        <img src={add} alt="add_product" />
       </div>
       <form method="post">
         <h3>Add New Product</h3>

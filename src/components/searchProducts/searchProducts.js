@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function Products(props) {
-  const history = useHistory();
-  const purpose = props.purpose;
+export default function SearchProducts(props) {
+  const [search, setSearch] = useState();
   const [products, setProducts] = useState();
+  const [allproducts, setAllProducts] = useState();
   try {
     useEffect(() => {
       axios
         .get("http://localhost:5000/api/home")
         .then((res) => {
+          setAllProducts(res.data);
           setProducts(res.data);
         })
         .catch((err) => {
@@ -20,15 +23,62 @@ function Products(props) {
   } catch (error) {
     console.log(error);
   }
+  const searchName = {
+    search: search,
+  };
 
+  const handleChange = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await axios.post(
+      "http://localhost:5000/api/admin/search",
+      searchName
+    );
+    if (response.data === "no match found") {
+      toast("no product found With this name");
+      setProducts(allproducts);
+    } else {
+      setProducts(response.data);
+    }
+    console.log(response.data);
+  };
+
+  const history = useHistory();
+  const purpose = props.purpose;
   const updateProduct = (productId) => {
     history.push({
       pathname: "/updateProduct",
       state: { productId: productId },
     });
   };
+
   return (
     <section>
+      <nav className="navbar navbar-light bg-light justify-content-between">
+        <p className="navbar-brand">Navbar</p>
+        <form className="form-inline">
+          <input
+            onChange={handleChange}
+            className="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button
+            onClick={handleSubmit}
+            className="btn btn-outline-success my-2 my-sm-0"
+            type="submit"
+          >
+            Search
+          </button>
+        </form>
+      </nav>
+
+      <ToastContainer />
       <div className="container-fluid">
         <div className="row p-5">
           {products
@@ -72,5 +122,3 @@ function Products(props) {
     </section>
   );
 }
-
-export default Products;

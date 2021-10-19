@@ -11,35 +11,35 @@ export default function footer() {
             {/* Grid column */}
             <div className="col-md-2 mb-3">
               <h6 className="text-uppercase font-weight-bold">
-                <a href="#!">About us</a>
+                <p>About us</p>
               </h6>
             </div>
             {/* Grid column */}
             {/* Grid column */}
             <div className="col-md-2 mb-3">
               <h6 className="text-uppercase font-weight-bold">
-                <a href="#!">Products</a>
+                <p>Products</p>
               </h6>
             </div>
             {/* Grid column */}
             {/* Grid column */}
             <div className="col-md-2 mb-3">
               <h6 className="text-uppercase font-weight-bold">
-                <a href="#!">Awards</a>
+                <p>Awards</p>
               </h6>
             </div>
             {/* Grid column */}
             {/* Grid column */}
             <div className="col-md-2 mb-3">
               <h6 className="text-uppercase font-weight-bold">
-                <a href="#!">Help</a>
+                <p>Help</p>
               </h6>
             </div>
             {/* Grid column */}
             {/* Grid column */}
             <div className="col-md-2 mb-3">
               <h6 className="text-uppercase font-weight-bold">
-                <a href="#!">Contact</a>
+                <p>Contact</p>
               </h6>
             </div>
             {/* Grid column */}
@@ -72,31 +72,31 @@ export default function footer() {
             <div className="col-md-12">
               <div className="mb-5 flex-center">
                 {/* Facebook */}
-                <a className="fb-ic">
+                <p className="fb-ic">
                   <i className="fab fa-facebook-f fa-lg white-text mr-4"> </i>
-                </a>
+                </p>
                 {/* Twitter */}
-                <a className="tw-ic">
+                <p className="tw-ic">
                   <i className="fab fa-twitter fa-lg white-text mr-4"> </i>
-                </a>
+                </p>
                 {/* Google +*/}
-                <a className="gplus-ic">
+                <p className="gplus-ic">
                   <i className="fab fa-google-plus-g fa-lg white-text mr-4">
                     {" "}
                   </i>
-                </a>
+                </p>
                 {/*Linkedin */}
-                <a className="li-ic">
+                <p className="li-ic">
                   <i className="fab fa-linkedin-in fa-lg white-text mr-4"> </i>
-                </a>
+                </p>
                 {/*Instagram*/}
-                <a className="ins-ic">
+                <p className="ins-ic">
                   <i className="fab fa-instagram fa-lg white-text mr-4"> </i>
-                </a>
+                </p>
                 {/*Pinterest*/}
-                <a className="pin-ic">
+                <p className="pin-ic">
                   <i className="fab fa-pinterest fa-lg white-text"> </i>
-                </a>
+                </p>
               </div>
             </div>
             {/* Grid column */}

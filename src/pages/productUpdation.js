@@ -1,10 +1,10 @@
 import React from "react";
 import AddProduct from "../components/addProduct/addProduct";
 
-export default function addProduct() {
+export default function ProductUpdation() {
   return (
     <div>
-      <AddProduct purpose="addProduct" />
+      <AddProduct purpose="productUpdation" />
     </div>
   );
 }

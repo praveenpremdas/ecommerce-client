@@ -4,14 +4,14 @@ import Navbar from "../components/navbar/navbar";
 import Products from "../components/products/products";
 import Footer from "../components/footer/footer";
 
-function home() {
+function Home() {
   return (
     <div className="home">
       <Navbar />
-      <Products />
+      <Products purpose="home" />
       <Footer />
     </div>
   );
 }
 
-export default home;
+export default Home;
