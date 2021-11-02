@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function SearchProducts(props) {
+export default function SearchProducts() {
   const [search, setSearch] = useState();
   const [products, setProducts] = useState();
   const [allproducts, setAllProducts] = useState();
@@ -48,7 +48,7 @@ export default function SearchProducts(props) {
   };
 
   const history = useHistory();
-  const purpose = props.purpose;
+
   const updateProduct = (productId) => {
     history.push({
       pathname: "/updateProduct",
@@ -99,18 +99,15 @@ export default function SearchProducts(props) {
                         <h5 className="card-title text-center">
                           {product.productName}
                         </h5>
-                        {purpose ? (
-                          <p
-                            className="btn btn-primary d-flex pl-5"
-                            onClick={() => {
-                              updateProduct(product._id);
-                            }}
-                          >
-                            Update
-                          </p>
-                        ) : (
-                          <p className="btn btn-primary d-flex pl-5">Buy Now</p>
-                        )}
+
+                        <p
+                          className="btn btn-primary d-flex pl-5"
+                          onClick={() => {
+                            updateProduct(product._id);
+                          }}
+                        >
+                          Update
+                        </p>
                       </div>
                     </div>
                   </div>

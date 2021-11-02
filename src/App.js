@@ -6,6 +6,8 @@ import AddProduct from "./components/addProduct/addProduct";
 import AddAnotherProduct from "./components/addProduct/addAnotherProduct";
 import ProductUpdation from "./pages/productUpdation";
 import ViewProducts from "./pages/viewProducts";
+import Login from "./pages/login";
+import Register from "./pages/register";
 
 function App() {
   return (
@@ -27,6 +29,12 @@ function App() {
       </Route>
       <Route path="/viewProducts">
         <ViewProducts />
+      </Route>
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path="/register">
+        <Register />
       </Route>
     </Router>
   );

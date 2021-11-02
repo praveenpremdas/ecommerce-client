@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 function Products(props) {
-  const history = useHistory();
-  const purpose = props.purpose;
   const [products, setProducts] = useState();
+  const location = useLocation();
   try {
     useEffect(() => {
       axios
@@ -21,12 +20,12 @@ function Products(props) {
     console.log(error);
   }
 
-  const updateProduct = (productId) => {
-    history.push({
-      pathname: "/updateProduct",
-      state: { productId: productId },
-    });
-  };
+  useEffect(() => {
+    if (location.hash === "#search") {
+      setProducts(location.state.products);
+    }
+  }, [location]);
+
   return (
     <section>
       <div className="container-fluid">
@@ -34,7 +33,10 @@ function Products(props) {
           {products
             ? products.map((product) => {
                 return (
-                  <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-5 d-inline-flex justify-content-center">
+                  <div
+                    key={product._id}
+                    className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-5 d-inline-flex justify-content-center"
+                  >
                     <div
                       className="card d-flex justify-content-center"
                       style={{ width: "13rem" }}
@@ -49,18 +51,8 @@ function Products(props) {
                         <h5 className="card-title text-center">
                           {product.productName}
                         </h5>
-                        {purpose ? (
-                          <p
-                            className="btn btn-primary d-flex pl-5"
-                            onClick={() => {
-                              updateProduct(product._id);
-                            }}
-                          >
-                            Update
-                          </p>
-                        ) : (
-                          <p className="btn btn-primary d-flex pl-5">Buy Now</p>
-                        )}
+
+                        <p className="btn btn-primary d-flex pl-5">Buy Now</p>
                       </div>
                     </div>
                   </div>
